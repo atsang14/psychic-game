@@ -24,17 +24,29 @@
 	var guesses = [];
 	var theGuess = randomChar();
 
+	var html =
+	"<p>Wins: " + 0 + "</p>" +
+	"<p>Losses: " + 0 + "</p>" + 
+	"<p>Guess Left: " + 0 + "</p>" +
+	"<p>Your Guess So Far: "+ 0 +"</p>";
+
+	document.getElementById('getGuess').innerHTML = html;
+
+
 
 // the getGuess Function plays the game after every key stroke
 	document.onkeyup = function getGuess(event){
-		input = event.key; 
+				input = event.key; 
 		guesses.push(input);
 		var guess = document.querySelector('#getGuess');
 		yourGuesses = input;
-		
+
+
 		// game logic 
 		if (numGuessesLeft >= 0){
 
+				// if the your guess does not match the random Char, then
+				// update 
 				if (yourGuesses != theGuess){
 					if (numGuessesLeft == 1 ) {
 						numLosses += 1;
@@ -54,12 +66,16 @@
 				"<p>Wins: " + numWins + "</p>" +
 				"<p>Losses: " + numLosses + "</p>" + 
 				"<p>Guess Left: " + numGuessesLeft + "</p>" +
-				"<p>Your Guess So Far: " + guesses + "</p>";
+				"<p>Your Guess So Far: "+ guesses +"</p>";
 
 				document.getElementById('getGuess').innerHTML = html;
 
 				// displayGuesses();
 		}	
+
+
+		
+		
 	}
 
 // the randomChar function creates a random Char
