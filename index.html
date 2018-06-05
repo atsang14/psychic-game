@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Pyschic Game</title>
+</head>
+<body>
+
+<h1>The Psychic game</h1>
+
+<h3>Guess what letter I'm thinking of</h3>
+
+<div id="getGuess">
+	<p></p>	
+</div>
+<!-- <p id="guess"></p> -->
+
+
+<script type="text/javascript">
+
+	var numWins = 0;
+	var numLosses = 0;
+	var numGuessesLeft = 10;
+	var yourGuesses = "";
+	var guesses = [];
+	var theGuess = randomChar();
+
+
+// the getGuess Function plays the game after every key stroke
+	document.onkeyup = function getGuess(event){
+		input = event.key; 
+		guesses.push(input);
+		var guess = document.querySelector('#getGuess');
+		yourGuesses = input;
+		
+		// game logic 
+		if (numGuessesLeft >= 0){
+
+				if (yourGuesses != theGuess){
+					if (numGuessesLeft == 1 ) {
+						numLosses += 1;
+						numGuessesLeft = 10;
+						guesses = [];
+					}
+					numGuessesLeft -= 1;
+				}
+				if (yourGuesses == theGuess){
+					numWins +=1;
+					numGuessesLeft = 10;
+					theGuess = randomChar();
+				}
+
+		// this displays the score and your guesses
+				var html =
+				"<p>Wins: " + numWins + "</p>" +
+				"<p>Losses: " + numLosses + "</p>" + 
+				"<p>Guess Left: " + numGuessesLeft + "</p>" +
+				"<p>Your Guess So Far: " + guesses + "</p>";
+
+				document.getElementById('getGuess').innerHTML = html;
+
+				// displayGuesses();
+		}	
+	}
+
+// the randomChar function creates a random Char
+	function randomChar() {
+	 	var text = "";
+	  	var possible = "abcdefghijklmnopqrstuvwxyz";
+
+	  	for (var i = 0; i < 1; i++) {
+	    	text += possible.charAt(Math.floor(Math.random() * possible.length));
+	  	}
+	  	return text;
+	}
+
+// the displayGuesses function displays the contents of the array called guesses
+	// function displayGuesses() {
+	//     guesses.toString();
+	//     document.getElementById("guess").innerHTML = guesses;
+	// }
+
+	
+
+
+</script>
+</body>
+</html>
